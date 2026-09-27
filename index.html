@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Mbaiam Deounam — IT & Cybersécurité</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0E14; --surface:#121821; --line:#232B36;
+    --accent:#39FF88; --accent2:#FF5C5C;
+    --text:#E8ECEF; --text-soft:#8D97A5;
+    --max:900px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:'Inter',sans-serif; line-height:1.6;
+  }
+  h1,h2,h3{font-family:'JetBrains Mono',monospace; margin:0; font-weight:700;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 24px;}
+  a{color:var(--accent);}
+
+  header{
+    position:sticky; top:0; z-index:10;
+    background:rgba(10,14,20,0.9); backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+    padding-top:env(safe-area-inset-top,0px);
+  }
+  nav.wrap{display:flex; justify-content:space-between; align-items:center; padding:16px 24px;}
+  .brand{font-family:'JetBrains Mono',monospace; font-size:0.95rem;}
+  .brand span{color:var(--accent);}
+  .nav-links{display:flex; gap:26px; list-style:none; margin:0; padding:0;}
+  .nav-links a{color:var(--text-soft); text-decoration:none; font-size:0.9rem;}
+  .nav-links a:hover{color:var(--accent);}
+  .nav-toggle{display:none; background:none; border:none; color:var(--text); font-size:1.5rem;}
+
+  section{padding:64px 0; border-bottom:1px solid var(--line);}
+  .eyebrow{color:var(--accent); font-family:'JetBrains Mono',monospace; font-size:0.85rem; margin-bottom:10px;}
+  h2{font-size:1.4rem; margin-bottom:28px;}
+
+  /* HERO */
+  .hero{padding:90px 0 70px;}
+  .hero h1{font-size:clamp(1.8rem,5vw,2.8rem); line-height:1.25; color:#fff;}
+  .hero h1 .cursor{color:var(--accent);}
+  .hero p{color:var(--text-soft); max-width:56ch; margin-top:18px; font-size:1.05rem;}
+  .hero-actions{margin-top:30px; display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    font-family:'JetBrains Mono',monospace; font-size:0.9rem; text-decoration:none;
+    padding:11px 20px; border-radius:4px; display:inline-block;
+  }
+  .btn-primary{background:var(--accent); color:#04140B; font-weight:700;}
+  .btn-ghost{border:1px solid var(--line); color:var(--text);}
+
+  /* ABOUT */
+  .about-grid{display:grid; grid-template-columns:1.2fr 0.8fr; gap:40px;}
+  .about-grid p{color:var(--text-soft); margin-bottom:14px;}
+  .terminal{
+    background:var(--surface); border:1px solid var(--line); border-radius:6px;
+    font-family:'JetBrains Mono',monospace; font-size:0.85rem; padding:18px;
+  }
+  .terminal .dot{display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:6px;}
+  .terminal-head{display:flex; gap:6px; margin-bottom:14px;}
+  .terminal-row{display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px dashed var(--line); color:var(--text-soft);}
+  .terminal-row span:last-child{color:var(--text);}
+
+  /* SKILLS */
+  .skill-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+  .skill-card{background:var(--surface); border:1px solid var(--line); border-radius:6px; padding:20px;}
+  .skill-card h3{font-size:0.95rem; color:var(--accent); margin-bottom:12px;}
+  .skill-card ul{margin:0; padding:0; list-style:none; color:var(--text-soft); font-size:0.9rem;}
+  .skill-card li{padding:5px 0;}
+  .skill-card li::before{content:"› "; color:var(--accent);}
+
+  /* CERTS */
+  .cert-row{
+    display:flex; justify-content:space-between; gap:16px; padding:14px 0;
+    border-bottom:1px solid var(--line); align-items:baseline;
+  }
+  .cert-row h3{font-size:0.95rem; font-family:'Inter'; font-weight:600;}
+  .cert-row p{margin:2px 0 0; color:var(--text-soft); font-size:0.85rem;}
+  .cert-date{font-family:'JetBrains Mono',monospace; font-size:0.8rem; color:var(--accent); white-space:nowrap;}
+
+  /* PROJECTS */
+  .project-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+  .project-card{background:var(--surface); border:1px solid var(--line); border-radius:6px; padding:20px; display:flex; flex-direction:column; gap:10px;}
+  .project-card h3{font-size:1rem; font-family:'Inter'; font-weight:600;}
+  .project-card p{margin:0; color:var(--text-soft); font-size:0.88rem; flex-grow:1;}
+  .status{align-self:flex-start; font-family:'JetBrains Mono',monospace; font-size:0.72rem; padding:3px 10px; border-radius:20px;}
+  .status.live{background:rgba(57,255,136,0.15); color:var(--accent);}
+  .status.soon{background:rgba(255,92,92,0.15); color:var(--accent2);}
+
+  /* CONTACT */
+  .contact-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+  .contact-card{background:var(--surface); border:1px solid var(--line); border-radius:6px; padding:18px;}
+  .contact-card span{display:block; color:var(--text-soft); font-size:0.8rem; margin-bottom:6px; font-family:'JetBrains Mono',monospace;}
+  .contact-card a,.contact-card div{color:var(--text); text-decoration:none; font-weight:500;}
+
+  footer{text-align:center; padding:26px 0; color:var(--text-soft); font-size:0.82rem; font-family:'JetBrains Mono',monospace;}
+
+  @media (max-width:760px){
+    .nav-links{
+      position:absolute; top:100%; left:0; right:0; background:var(--bg);
+      flex-direction:column; border-bottom:1px solid var(--line); display:none;
+    }
+    .nav-links.open{display:flex;}
+    .nav-links a{padding:14px 24px; border-bottom:1px solid var(--line);}
+    .nav-toggle{display:block;}
+    .about-grid,.skill-grid,.project-grid,.contact-grid{grid-template-columns:1fr;}
+    .cert-row{flex-direction:column; gap:2px;}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;} html{scroll-behavior:auto;}}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="brand">mbaiam<span>@</span>deounam</div>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">whoami</a></li>
+      <li><a href="#skills">skills</a></li>
+      <li><a href="#certs">certs</a></li>
+      <li><a href="#projects">projects</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">// N'Djamena, Tchad</div>
+    <h1>Mbaiam Deounam<br>Réseaux, Systèmes &amp; Cybersécurité<span class="cursor">_</span></h1>
+    <p>Technicien IT avec 5 ans d'expérience terrain, aujourd'hui certifié sur le
+      parcours Cisco Cybersecurity Defense Analyst. Je construis des outils
+      web pour appliquer concrètement ce que j'apprends en sécurité.</p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn btn-primary">Voir les projets</a>
+      <a href="#contact" class="btn btn-ghost">Contact</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div>
+      <div class="eyebrow">01 // whoami</div>
+      <h2>À propos</h2>
+      <p>5 ans comme Technicien Supérieur en Système de Sécurité et Informatique
+        chez Africa Impact Technology (Libreville) : support Helpdesk, gestion
+        du trafic et de la sécurité réseau, supervision d'équipe technique.</p>
+      <p>Certifié Cybersecurity Defense Analyst (Cisco Networking Academy, avec
+        Splunk) — analyse de données de sécurité et détection des menaces.</p>
+    </div>
+    <div class="terminal">
+      <div class="terminal-head">
+        <span class="dot" style="background:var(--accent2)"></span>
+        <span class="dot" style="background:#FFC93D"></span>
+        <span class="dot" style="background:var(--accent)"></span>
+      </div>
+      <div class="terminal-row"><span>base</span><span>N'Djamena, Tchad</span></div>
+      <div class="terminal-row"><span>certif</span><span>Cybersecurity Defense Analyst</span></div>
+      <div class="terminal-row"><span>experience</span><span>5 ans (IT & sécurité)</span></div>
+      <div class="terminal-row"><span>en_cours</span><span>Dev web & Python</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="eyebrow">02 // stack</div>
+    <h2>Compétences</h2>
+    <div class="skill-grid">
+      <div class="skill-card">
+        <h3>Réseaux &amp; Systèmes</h3>
+        <ul>
+          <li>LAN/WAN, TCP/IP, DHCP</li>
+          <li>Windows &amp; Linux</li>
+          <li>Support Helpdesk N1</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Cybersécurité</h3>
+        <ul>
+          <li>Analyse avec Splunk</li>
+          <li>Détection des menaces</li>
+          <li>Gestion sécurité réseau</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Données &amp; Dev</h3>
+        <ul>
+          <li>Excel, SQL, Power BI</li>
+          <li>HTML/CSS/JS</li>
+          <li>Python</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certs">
+  <div class="wrap">
+    <div class="eyebrow">03 // certifications</div>
+    <h2>Certifications</h2>
+    <div class="cert-row">
+      <div>
+        <h3>Cybersecurity Defense Analyst Pathway Exam</h3>
+        <p>Cisco Networking Academy</p>
+      </div>
+      <div class="cert-date">07/09/2026</div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="eyebrow">04 // build</div>
+    <h2>Projets</h2>
+    <div class="project-grid">
+      <div class="project-card">
+        <h3>Ce portfolio</h3>
+        <p>Site personnel en HTML/CSS, conçu et codé pour présenter mon profil IT & sécurité.</p>
+        <span class="status live">en ligne</span>
+      </div>
+      <div class="project-card">
+        <h3>Vérificateur de mots de passe</h3>
+        <p>Outil web évaluant la solidité d'un mot de passe et proposant des conseils de sécurité.</p>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+          <a href="https://alexandredeounam-tech.github.io/password-checker/" class="status live" style="text-decoration:none;">démo live</a>
+          <a href="https://github.com/alexandredeounam-tech/password-checker" style="color:var(--text-soft); font-family:'JetBrains Mono',monospace; font-size:0.78rem;">code source →</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <h3>Scanner de ports</h3>
+        <p>Utilitaire Python pour identifier les ports ouverts sur une machine du réseau local.</p>
+        <span class="status soon">à venir</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="border-bottom:none;">
+  <div class="wrap">
+    <div class="eyebrow">05 // contact</div>
+    <h2>Me contacter</h2>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <span>email</span>
+        <a href="mailto:alexandredeounam@gmail.com">alexandredeounam@gmail.com</a>
+      </div>
+      <div class="contact-card">
+        <span>tel_1</span>
+        <div>+235 91 53 14 16</div>
+      </div>
+      <div class="contact-card">
+        <span>tel_2</span>
+        <div>+235 86 05 67 88</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>&copy; 2026 Mbaiam Deounam — N'Djamena, Tchad</footer>
+
+<script>
+  const t=document.getElementById('navToggle'), l=document.getElementById('navLinks');
+  t.addEventListener('click',()=>l.classList.toggle('open'));
+  l.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>l.classList.remove('open')));
+</script>
+</body>
+</html>
